@@ -11,7 +11,10 @@ guidance_task:
     - Record this result
     
     STEP 2:
-    - Call the "search_heritage" tool to find relevant information
+    - Analyze the question to determine what tools are needed:
+      * If asking about heritage/history → Use "search_heritage" tool
+      * If asking about weather/forecast → Use "Weather Forecast Tool" with the location
+      * If asking about both → Use both tools
     
     STEP 3:
     - Write your answer in the language detected in STEP 1:
@@ -24,7 +27,7 @@ guidance_task:
     The LANGUAGE of the question matters, NOT the topic/location mentioned in it.
 
   expected_output: >
-    Heritage information in the same language as the question was asked.
-    Start with: "Detected Language: [ar/en]"
+    Heritage information or weather forecast, in the same language as the question was asked. 
+    Just put the answer same as language the question asked with it.
 
   agent: guidance

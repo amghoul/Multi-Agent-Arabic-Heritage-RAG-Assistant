@@ -6,11 +6,13 @@ from typing import List, Type
 from pydantic import BaseModel, Field
 from .tools.heritage_tool import HeritageTool
 from .tools.language_detection import LanguageDetectionTool
+from .tools.weather_tool import WeatherTool
 from transformers import pipeline
 
 
 txt_tool = HeritageTool()
 language_tool = LanguageDetectionTool()
+weather_tool = WeatherTool()
 
 @CrewBase
 class RagCrewai():
@@ -20,7 +22,6 @@ class RagCrewai():
     tasks: List[Task]
 
 
-
     @agent
     def guidance(self) -> Agent:
         return Agent(
@@ -28,9 +29,8 @@ class RagCrewai():
             llm=LLM(
                 model="ollama/aya-expanse:8b",
                 base_url="http://localhost:11434",
-
             ),
-            tools=[txt_tool, language_tool],
+            tools=[txt_tool, language_tool, weather_tool],
             verbose=True,
         )
 
